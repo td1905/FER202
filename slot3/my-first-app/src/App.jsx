@@ -1,5 +1,5 @@
 import "./App.css";
-import About from "./About"; // Giả sử file About.jsx cùng nằm trong thư mục src
+import About from "./About";
 
 function App() {
   return (
