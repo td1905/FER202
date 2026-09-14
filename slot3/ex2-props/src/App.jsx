@@ -1,33 +1,31 @@
 import ProductInfo from "./ProductInfo";
 
 function App() {
-  const productList = [
+  const pizzaList = [
     {
       id: 1,
-      name: "Laptop Dell Inspiron",
-      price: 18000000,
-      tags: ["Laptop", "Dell", "Văn phòng"]
+      name: "Pizza Hải Sản",
+      price: 150000,
+      tags: ["haisan", "cay"],
+      avatar: "/anh1.jpg"
     },
     {
       id: 2,
-      name: "Bàn phím DareU",
-      price: 650000,
-      tags: ["Phím cơ", "Gaming"]
-    },
-    {
-      id: 3,
-      name: "Chuột Logitech",
-      price: 450000,
-      tags: ["Chuột", "Không dây"]
+      name: "Pizza Bò Phô Mai",
+      price: 180000,
+      tags: ["bo", "phomai"],
+      avatar: "/anh2.jpg"
     }
   ];
 
   return (
-    <div>
-      <h2>Thông tin sản phẩm</h2>
-      {productList.map((item) => (
-        <ProductInfo key={item.id} product={item} />
-      ))}
+    <div style={{ padding: "20px" }}>
+      <h1>Danh sách Pizza</h1>
+      <div style={{ display: "flex" }}>
+        {pizzaList.map((item) => (
+          <ProductInfo key={item.id} product={item} />
+        ))}
+      </div>
     </div>
   );
 }
