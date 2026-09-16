@@ -1,12 +1,13 @@
-import ProductList from "./ProductList";
-function App() {
-  const pizzaData = [
-    { id: 1, name: 'Pizza Hải Sản', price: 150000, avatar: '/anh1.jpg' },
-    { id: 2, name: 'Pizza Bò Phô Mai', price: 180000, avatar: '/anh2.jpg' },
-    { id: 3, name: 'Pizza Gà Nấm', price: 160000, avatar: '/anh3.jpg' }
-  ];
+// src/App.jsx
+import ProductList from './components/ProductList';
+import { pizzaData } from './data/pizzaData'; // <-- Import dữ liệu từ file data
 
-  return <ProductList products={pizzaData} />;
+function App() {
+  return (
+    <div>
+      <ProductList products={pizzaData} />
+    </div>
+  );
 }
 
 export default App;
