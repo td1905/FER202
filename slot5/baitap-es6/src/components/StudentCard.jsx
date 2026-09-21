@@ -14,10 +14,17 @@ const StudentCard = ({ student }) => {
 
   return (
     <Card style={{ width: '18rem' }} className="shadow-sm">
-      <Card.Img variant="top" src={avatar} alt={name} style={{ height: 200, objectFit: 'cover' }} />
+      <Card.Img
+        variant="top"
+        src={avatar}
+        alt={name}
+        style={{ height: 200, objectFit: 'cover' }}
+      />
       <Card.Body>
         <Card.Title>{name}</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">{id} - {major}</Card.Subtitle>
+        <Card.Subtitle className="mb-2 text-muted">
+          {id} - {major}
+        </Card.Subtitle>
       </Card.Body>
       <ListGroup variant="flush">
         <ListGroup.Item><strong>GPA:</strong> {gpa}</ListGroup.Item>
