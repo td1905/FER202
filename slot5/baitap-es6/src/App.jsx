@@ -2,6 +2,8 @@ import Container from 'react-bootstrap/Container';
 import WelcomeCard from './components/WelcomeCard';
 import StudentCard from './components/StudentCard';
 import ProductCard from './components/ProductCard';
+import ProductList from './components/ProductList';
+import { products } from './data/products';
 
 const students = [
   {
@@ -30,7 +32,6 @@ const students = [
   },
 ];
 
-// Dữ liệu kiểm thử Bài 3
 const productA = {
   id: 1,
   name: 'Tai nghe Bluetooth',
@@ -39,32 +40,41 @@ const productA = {
   rating: { rate: 4.5, count: 120 },
   category: { name: 'Âm thanh' },
 };
-const productB = { id: 2, name: 'Chuột không dây', price: 0 }; // Thiếu ảnh, rating, category, giá bằng 0
-const productC = { id: 3 }; // Gần như rỗng
+const productB = { id: 2, name: 'Chuột không dây', price: 0 };
+const productC = { id: 3 };
 
 function App() {
   return (
     <Container className="my-4">
-      <h2 className="mb-4">Bài 1: Card chào mừng</h2>
-      <WelcomeCard />
+      <h1 className="text-center mb-5 text-primary fw-bold">Lab 2: ES6 - React Bootstrap (Bài 1 - 4)</h1>
 
-      <hr className="my-4" />
+      <section className="mb-5">
+        <h3 className="border-bottom pb-2">Bài 1: Card chào mừng</h3>
+        <WelcomeCard />
+      </section>
 
-      <h2 className="mb-4">Bài 2: StudentCard</h2>
-      <div className="d-flex gap-3 flex-wrap">
-        {students.map((st) => (
-          <StudentCard key={st.id} student={st} />
-        ))}
-      </div>
+      <section className="mb-5">
+        <h3 className="border-bottom pb-2">Bài 2: StudentCard</h3>
+        <div className="d-flex gap-3 flex-wrap">
+          {students.map((st) => (
+            <StudentCard key={st.id} student={st} />
+          ))}
+        </div>
+      </section>
 
-      <hr className="my-4" />
+      <section className="mb-5">
+        <h3 className="border-bottom pb-2">Bài 3: ProductCard an toàn dữ liệu</h3>
+        <div className="row g-3">
+          <div className="col-md-4"><ProductCard product={productA} /></div>
+          <div className="col-md-4"><ProductCard product={productB} /></div>
+          <div className="col-md-4"><ProductCard product={productC} /></div>
+        </div>
+      </section>
 
-      <h2 className="mb-4">Bài 3: ProductCard an toàn dữ liệu</h2>
-      <div className="row g-3">
-        <div className="col-md-4"><ProductCard product={productA} /></div>
-        <div className="col-md-4"><ProductCard product={productB} /></div>
-        <div className="col-md-4"><ProductCard product={productC} /></div>
-      </div>
+      <section className="mb-5">
+        <h3 className="border-bottom pb-2">Bài 4: Lưới Card sản phẩm</h3>
+        <ProductList products={products} />
+      </section>
     </Container>
   );
 }
