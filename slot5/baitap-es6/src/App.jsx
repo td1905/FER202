@@ -1,6 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import WelcomeCard from './components/WelcomeCard';
 import StudentCard from './components/StudentCard';
+import ProductCard from './components/ProductCard';
 
 const students = [
   {
@@ -29,6 +30,18 @@ const students = [
   },
 ];
 
+// Dữ liệu kiểm thử Bài 3
+const productA = {
+  id: 1,
+  name: 'Tai nghe Bluetooth',
+  price: 590000,
+  image: 'https://picsum.photos/seed/headphone/300/200',
+  rating: { rate: 4.5, count: 120 },
+  category: { name: 'Âm thanh' },
+};
+const productB = { id: 2, name: 'Chuột không dây', price: 0 }; // Thiếu ảnh, rating, category, giá bằng 0
+const productC = { id: 3 }; // Gần như rỗng
+
 function App() {
   return (
     <Container className="my-4">
@@ -42,6 +55,15 @@ function App() {
         {students.map((st) => (
           <StudentCard key={st.id} student={st} />
         ))}
+      </div>
+
+      <hr className="my-4" />
+
+      <h2 className="mb-4">Bài 3: ProductCard an toàn dữ liệu</h2>
+      <div className="row g-3">
+        <div className="col-md-4"><ProductCard product={productA} /></div>
+        <div className="col-md-4"><ProductCard product={productB} /></div>
+        <div className="col-md-4"><ProductCard product={productC} /></div>
       </div>
     </Container>
   );
