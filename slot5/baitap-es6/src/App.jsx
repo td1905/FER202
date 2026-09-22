@@ -3,7 +3,7 @@ import WelcomeCard from './components/WelcomeCard';
 import StudentCard from './components/StudentCard';
 import ProductCard from './components/ProductCard';
 import ProductList from './components/ProductList';
-import { products } from './data/products';
+import { products } from './data/product';
 
 const students = [
   {
@@ -11,7 +11,7 @@ const students = [
     name: 'Nguyễn Văn An',
     major: 'Software Engineering',
     gpa: 8.5,
-    avatar: 'https://i.pravatar.cc/200?img=12',
+    avatar: 'https://i.pinimg.com/736x/64/6c/f6/646cf6181dbe14fb85ece7613e9e019f.jpg',
     contact: { email: 'an.nv@fpt.edu.vn', phone: '0901 234 567' },
   },
   {
@@ -19,7 +19,7 @@ const students = [
     name: 'Trần Thị Bình',
     major: 'Artificial Intelligence',
     gpa: 9.0,
-    avatar: 'https://i.pravatar.cc/200?img=25',
+    avatar: 'https://i.pinimg.com/736x/91/bc/b4/91bcb4c16603b731a0ac9b654604c5fc.jpg',
     contact: { email: 'binh.tt@fpt.edu.vn', phone: '0902 345 678' },
   },
   {
@@ -27,7 +27,7 @@ const students = [
     name: 'Lê Hoàng Cường',
     major: 'Digital Marketing',
     gpa: 7.8,
-    avatar: 'https://i.pravatar.cc/200?img=33',
+    avatar: 'https://i.pinimg.com/736x/ee/9d/27/ee9d270d9b221720b22145252af134d5.jpg',
     contact: { email: 'cuong.lh@fpt.edu.vn', phone: '0903 456 789' },
   },
 ];
@@ -36,7 +36,7 @@ const productA = {
   id: 1,
   name: 'Tai nghe Bluetooth',
   price: 590000,
-  image: 'https://picsum.photos/seed/headphone/300/200',
+  image: 'https://i.pinimg.com/736x/ee/87/00/ee870043c240f8b6429a27ebf1c88839.jpg',
   rating: { rate: 4.5, count: 120 },
   category: { name: 'Âm thanh' },
 };
