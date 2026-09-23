@@ -1,0 +1,22 @@
+/* Chiều cao Banner */
+.hero-banner {
+  max-height: 420px;
+  overflow: hidden;
+}
+
+.hero-img {
+  height: 420px;
+  filter: brightness(0.85);
+}
+
+/* Ảnh của các Card Menu */
+.menu-card-img {
+  height: 180px;
+  object-fit: cover;
+}
+
+/* Tùy chỉnh màu placeholder cho giống mẫu */
+::placeholder {
+  font-size: 0.9rem;
+  color: #888 !important;
+}
