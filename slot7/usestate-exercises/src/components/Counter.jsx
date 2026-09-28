@@ -9,12 +9,12 @@ function Counter() {
       className="d-flex flex-column align-items-center justify-content-center mx-auto rounded shadow"
       style={{
         backgroundColor: '#282c34',
-        width: '320px',
+        width: '360px',
         height: '240px',
         color: '#ffffff',
       }}
     >
-      {/* Cặp nút Decrement & Increment */}
+      {/*Decrement, Reset, Increment */}
       <div className="d-flex gap-2 mb-4">
         <Button
           variant="light"
@@ -24,6 +24,16 @@ function Counter() {
         >
           - Decrement
         </Button>
+
+        <Button
+          variant="secondary"
+          size="sm"
+          className="px-2 py-1 fw-normal border"
+          onClick={() => setCount(0)}
+        >
+          Reset
+        </Button>
+
         <Button
           variant="light"
           size="sm"
@@ -34,7 +44,7 @@ function Counter() {
         </Button>
       </div>
 
-      {/* Chữ Count màu trắng rõ ràng */}
+      {/* Hiển thị số đếm */}
       <h2 className="m-0 fw-normal" style={{ fontSize: '2rem', color: '#ffffff' }}>
         Count: {count}
       </h2>
