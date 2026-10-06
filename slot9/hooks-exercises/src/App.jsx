@@ -1,4 +1,5 @@
 import QuantityPicker from './components/QuantityPicker';
+import MiniCart from './components/MiniCart';
 
 const App = () => (
   <div className="container my-4">
@@ -7,6 +8,9 @@ const App = () => (
       <QuantityPicker />
       <QuantityPicker min={2} max={5} />
     </div>
+
+    <h5>Phần 2. Giỏ hàng mini</h5>
+    <MiniCart />
   </div>
 );
 
