@@ -1,16 +1,25 @@
 import QuantityPicker from './components/QuantityPicker';
 import MiniCart from './components/MiniCart';
+import ProfilePreview from './components/ProfilePreview';
 
 const App = () => (
   <div className="container my-4">
-    <h5>Phần 1. Bộ chọn số lượng</h5>
-    <div className="d-flex flex-column gap-3 mb-4">
-      <QuantityPicker />
-      <QuantityPicker min={2} max={5} />
-    </div>
+    <h3 className="mb-4 text-primary">Lab 4: Exercises Hooks</h3>
 
-    <h5>Phần 2. Giỏ hàng mini</h5>
-    <MiniCart />
+    <section className="mb-5">
+      <h4>Bài 1. Bộ chọn số lượng & Giỏ hàng mini</h4>
+      <div className="d-flex flex-column gap-3 mb-3">
+        <QuantityPicker />
+      </div>
+      <MiniCart />
+    </section>
+
+    <hr />
+
+    <section className="mb-5">
+      <h4>Bài 2. Hồ sơ xem trước trực tiếp</h4>
+      <ProfilePreview />
+    </section>
   </div>
 );
 
