@@ -1,6 +1,9 @@
 import QuantityPicker from './components/QuantityPicker';
 import MiniCart from './components/MiniCart';
 import ProfilePreview from './components/ProfilePreview';
+import ProductFilter from './components/ProductFilter';
+import RegisterForm from './components/RegisterForm';
+import { products } from './data/products';
 
 const App = () => (
   <div className="container my-4">
@@ -8,10 +11,10 @@ const App = () => (
 
     <section className="mb-5">
       <h4>Bài 1. Bộ chọn số lượng & Giỏ hàng mini</h4>
-      <div className="d-flex flex-column gap-3 mb-3">
-        <QuantityPicker />
+      <QuantityPicker />
+      <div className="mt-3">
+        <MiniCart />
       </div>
-      <MiniCart />
     </section>
 
     <hr />
@@ -19,6 +22,20 @@ const App = () => (
     <section className="mb-5">
       <h4>Bài 2. Hồ sơ xem trước trực tiếp</h4>
       <ProfilePreview />
+    </section>
+
+    <hr />
+
+    <section className="mb-5">
+      <h4>Bài 3. Tìm kiếm, lọc và sắp xếp sản phẩm</h4>
+      <ProductFilter products={products} />
+    </section>
+
+    <hr />
+
+    <section className="mb-5">
+      <h4>Bài 4. Form đăng ký có điều khiển</h4>
+      <RegisterForm />
     </section>
   </div>
 );
