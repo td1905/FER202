@@ -3,6 +3,7 @@ import MiniCart from './components/MiniCart';
 import ProfilePreview from './components/ProfilePreview';
 import ProductFilter from './components/ProductFilter';
 import RegisterForm from './components/RegisterForm';
+import ValidatedRegisterForm from './components/ValidatedRegisterForm';
 import { products } from './data/products';
 
 const App = () => (
@@ -36,6 +37,13 @@ const App = () => (
     <section className="mb-5">
       <h4>Bài 4. Form đăng ký có điều khiển</h4>
       <RegisterForm />
+    </section>
+
+    <hr />
+
+    <section className="mb-5">
+      <h4>Bài 5. Form đăng ký có validation (touched & regex)</h4>
+      <ValidatedRegisterForm />
     </section>
   </div>
 );
