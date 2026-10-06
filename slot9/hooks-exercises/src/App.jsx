@@ -1,75 +1,35 @@
-import QuantityPicker from './components/QuantityPicker';
-import MiniCart from './components/MiniCart';
-import ProfilePreview from './components/ProfilePreview';
-import ProductFilter from './components/ProductFilter';
-import RegisterForm from './components/RegisterForm';
-import ValidatedRegisterForm from './components/ValidatedRegisterForm';
-import TodoList from './components/TodoList';
-import CartDemoPage from './pages/CartDemoPage';
+import { ThemeProvider } from './context/ThemeContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import Layout from './components/layout/Layout';
 import LoginForm from './components/LoginForm';
-import { products } from './data/products';
+
+// Component con nằm BÊN TRONG Provider để có thể gọi useAuth()
+const HomeContent = () => {
+  const { isLoggedIn, user, login } = useAuth();
+
+  return isLoggedIn ? (
+    <div className="alert alert-success">
+      <h5>Đăng nhập thành công!</h5>
+      <p className="mb-0">
+        {`Bạn đang đăng nhập bằng tài khoản: ${user.email}. Hãy bấm nút Tối/Sáng trên Header để kiểm tra theme toàn trang.`}
+      </p>
+    </div>
+  ) : (
+    <div>
+      <p className="text-muted text-center mb-3">Vui lòng đăng nhập để tiếp tục:</p>
+      <LoginForm onLoginSuccess={login} />
+    </div>
+  );
+};
 
 const App = () => (
-  <div className="container my-4">
-    <h3 className="mb-4 text-primary">Lab 4: Exercises Hooks</h3>
-
-    <section className="mb-5">
-      <h4>Bài 1. Bộ chọn số lượng & Giỏ hàng mini</h4>
-      <QuantityPicker />
-      <div className="mt-3">
-        <MiniCart />
-      </div>
-    </section>
-
-    <hr />
-
-    <section className="mb-5">
-      <h4>Bài 2. Hồ sơ xem trước trực tiếp</h4>
-      <ProfilePreview />
-    </section>
-
-    <hr />
-
-    <section className="mb-5">
-      <h4>Bài 3. Tìm kiếm, lọc và sắp xếp sản phẩm</h4>
-      <ProductFilter products={products} />
-    </section>
-
-    <hr />
-
-    <section className="mb-5">
-      <h4>Bài 4. Form đăng ký có điều khiển</h4>
-      <RegisterForm />
-    </section>
-
-    <hr />
-
-    <section className="mb-5">
-      <h4>Bài 5. Form đăng ký có validation</h4>
-      <ValidatedRegisterForm />
-    </section>
-
-    <hr />
-
-    <section className="mb-5">
-      <h4>Bài 6. Todo list</h4>
-      <TodoList />
-    </section>
-
-    <hr />
-
-    <section className="mb-5">
-      <h4>Bài 7. Giỏ hàng với useReducer</h4>
-      <CartDemoPage />
-    </section>
-
-    <hr />
-
-    <section className="mb-5">
-      <h4>Bài 8. Form đăng nhập với useReducer (Async Action)</h4>
-      <LoginForm />
-    </section>
-  </div>
+  <ThemeProvider>
+    <AuthProvider>
+      <Layout title="Bài 9: Theme & Auth với useContext">
+        <HomeContent />
+      </Layout>
+    </AuthProvider>
+  </ThemeProvider>
 );
 
 export default App;
