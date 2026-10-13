@@ -1,140 +1,117 @@
-import { useState } from 'react';
-import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
-import { Container, Card, Form, Button, Alert } from 'react-bootstrap';
+import { useSearchParams } from 'react-router-dom';
+import { Container, Row, Col, Form, Table, Button } from 'react-bootstrap';
 
-const EventPage = () => {
-  const navigate = useNavigate();
-
-  return (
-    <Card className="text-center p-4">
-      <Card.Body>
-        <Card.Title as="h2">FPTU Tech Day 2026</Card.Title>
-        <Card.Text className="text-muted my-3">
-          Sự kiện công nghệ thường niên quy tụ hàng trăm chuyên gia và sinh viên CNTT.
-        </Card.Text>
-        <Button variant="success" size="lg" onClick={() => navigate('/register')}>
-          Đăng ký ngay
-        </Button>
-      </Card.Body>
-    </Card>
-  );
-};
-
-const RegisterPage = () => {
-  const navigate = useNavigate();
-  const [form, setForm] = useState({ name: '', email: '', session: 'Sáng' });
-  const [error, setError] = useState('');
-
-  const handleChange = (e) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const trimmedName = form.name.trim();
-
-    if (!trimmedName) {
-      setError('Vui lòng nhập họ và tên.');
-      return;
-    }
-    if (!form.email.includes('@')) {
-      setError('Email không hợp lệ (cần chứa ký tự @).');
-      return;
-    }
-
-    setError('');
-    navigate('/success', {
-      state: { ...form, name: trimmedName },
-      replace: true,
-    });
-  };
-
-  return (
-    <Card className="p-4 mx-auto" style={{ maxWidth: '500px' }}>
-      <Card.Title>Biểu mẫu đăng ký tham gia</Card.Title>
-      {error && <Alert variant="danger" className="mt-2">{error}</Alert>}
-      <Form onSubmit={handleSubmit} className="mt-3">
-        <Form.Group className="mb-3">
-          <Form.Label>Họ và tên</Form.Label>
-          <Form.Control
-            type="text"
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-            placeholder="Nguyễn Văn A"
-          />
-        </Form.Group>
-
-        <Form.Group className="mb-3">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            placeholder="name@example.com"
-          />
-        </Form.Group>
-
-        <Form.Group className="mb-3">
-          <Form.Label>Buổi tham dự</Form.Label>
-          <Form.Select name="session" value={form.session} onChange={handleChange}>
-            <option value="Sáng">Sáng (08:00 - 11:30)</option>
-            <option value="Chiều">Chiều (13:30 - 17:00)</option>
-          </Form.Select>
-        </Form.Group>
-
-        <div className="d-flex justify-content-between pt-2">
-          <Button variant="secondary" type="button" onClick={() => navigate(-1)}>
-            Quay lại
-          </Button>
-          <Button variant="primary" type="submit">
-            Gửi đăng ký
-          </Button>
-        </div>
-      </Form>
-    </Card>
-  );
-};
-
-const SuccessPage = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const data = location.state;
-
-  if (!data) {
-    return <Navigate to="/register" replace />;
-  }
-
-  return (
-    <Card className="p-4 mx-auto text-center" style={{ maxWidth: '550px' }}>
-      <Card.Body>
-        <Card.Title as="h3" className="text-success">Đăng ký thành công!</Card.Title>
-        <Card.Text className="my-3">
-          Cảm ơn <strong>{data.name}</strong>, vé tham dự đã được gửi tới hòm thư <strong>{data.email}</strong>.
-        </Card.Text>
-        <p className="text-muted">Buổi tham gia đăng ký: <strong>{data.session}</strong></p>
-        <div className="d-flex justify-content-center gap-2 mt-4">
-          <Button variant="outline-primary" onClick={() => navigate('/register')}>
-            Đăng ký thêm người khác
-          </Button>
-          <Button variant="primary" onClick={() => navigate('/')}>
-            Về trang sự kiện
-          </Button>
-        </div>
-      </Card.Body>
-    </Card>
-  );
-};
+const STUDENTS = [
+  { id: 'SE160001', name: 'Phạm Minh Anh', className: 'SE20B01', gpa: 8.5 },
+  { id: 'SE160002', name: 'Trần Bình Minh', className: 'SE20B02', gpa: 7.9 },
+  { id: 'SE160003', name: 'Võ Thanh Dũng', className: 'SE20B01', gpa: 6.8 },
+  { id: 'SE160004', name: 'Đỗ Ngọc Hân', className: 'SE20B04', gpa: 9.1 },
+  { id: 'SE160005', name: 'Nguyễn Quốc Cường', className: 'SE20B02', gpa: 8.0 },
+  { id: 'SE160006', name: 'Lê Hoàng Nam', className: 'SE20B04', gpa: 7.4 },
+];
 
 export default function App() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const q = searchParams.get('q') ?? '';
+  const selectedClass = searchParams.get('class') ?? '';
+
+  const updateParam = (key, value, replace = false) => {
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        if (value.trim()) {
+          next.set(key, value);
+        } else {
+          next.delete(key);
+        }
+        return next;
+      },
+      { replace }
+    );
+  };
+
+  const filteredStudents = STUDENTS.filter((s) => {
+    const keyword = q.toLowerCase().trim();
+    const matchKeyword =
+      !keyword ||
+      s.name.toLowerCase().includes(keyword) ||
+      s.id.toLowerCase().includes(keyword);
+
+    const matchClass = !selectedClass || s.className === selectedClass;
+
+    return matchKeyword && matchClass;
+  });
+
   return (
-    <Container className="p-4">
-      <Routes>
-        <Route path="/" element={<EventPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/success" element={<SuccessPage />} />
-      </Routes>
+    <Container className="p-4 border rounded bg-white mt-3">
+      <h3 className="mb-4">Danh bạ sinh viên</h3>
+
+      <Row className="g-3 mb-3">
+        <Col md={6}>
+          <Form.Control
+            type="text"
+            placeholder="Tìm theo tên hoặc MSSV..."
+            value={q}
+            onChange={(e) => updateParam('q', e.target.value, true)}
+          />
+        </Col>
+
+        <Col md={4}>
+          <Form.Select
+            value={selectedClass}
+            onChange={(e) => updateParam('class', e.target.value, false)}
+          >
+            <option value="">-- Tất cả lớp --</option>
+            <option value="SE20B01">SE20B01</option>
+            <option value="SE20B02">SE20B02</option>
+            <option value="SE20B04">SE20B04</option>
+          </Form.Select>
+        </Col>
+
+        <Col md={2}>
+          <Button
+            variant="outline-secondary"
+            className="w-100"
+            onClick={() => setSearchParams({})}
+          >
+            Xóa lọc
+          </Button>
+        </Col>
+      </Row>
+
+      <p className="text-muted">
+        Tìm thấy <strong>{filteredStudents.length}</strong>/{STUDENTS.length} sinh viên.
+      </p>
+
+      <Table striped bordered hover>
+        <thead className="table-dark">
+          <tr>
+            <th>MSSV</th>
+            <th>Họ và tên</th>
+            <th>Lớp</th>
+            <th>GPA</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredStudents.length > 0 ? (
+            filteredStudents.map((s) => (
+              <tr key={s.id}>
+                <td>{s.id}</td>
+                <td>{s.name}</td>
+                <td>{s.className}</td>
+                <td>{s.gpa.toFixed(1)}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={4} className="text-center text-muted py-3">
+                Không có sinh viên phù hợp.
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </Table>
     </Container>
   );
 }
