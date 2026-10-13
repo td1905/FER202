@@ -1,88 +1,118 @@
-import { Routes, Route, Link, NavLink } from 'react-router-dom';
-import { Navbar, Nav, Container, Card, ListGroup, Button, Row, Col } from 'react-bootstrap';
+import { Routes, Route, NavLink, Outlet, Navigate } from 'react-router-dom';
+import { Navbar, Nav, Container, Table } from 'react-bootstrap';
+
+const MainLayout = () => (
+  <div className="border rounded bg-light p-3">
+    <Navbar bg="primary" variant="dark" className="px-3 rounded mb-3">
+      <Navbar.Brand>Thư viện FPT</Navbar.Brand>
+      <Nav className="me-auto">
+        <Nav.Link as={NavLink} to="/" end>Trang chủ</Nav.Link>
+        <Nav.Link as={NavLink} to="/books">Sách</Nav.Link>
+        <Nav.Link as={NavLink} to="/help">Hướng dẫn</Nav.Link>
+      </Nav>
+    </Navbar>
+
+    <Container as="main" className="bg-white p-4 rounded border min-vh-50">
+      <Outlet />
+    </Container>
+
+    <footer className="text-center text-muted py-3 mt-3 border-top small">
+      © 2026 Thư viện FPT University. All rights reserved.
+    </footer>
+  </div>
+);
 
 const HomePage = () => (
-  <div className="py-4 text-center">
-    <h2>Xin chào, mình là Sinh viên Kỹ thuật Phần mềm 👋</h2>
-    <p className="text-muted">Chào mừng bạn đến với portfolio cá nhân của mình.</p>
-    <Button as={Link} to="/projects" variant="primary">Xem dự án của mình</Button>
+  <div>
+    <h3>Chào mừng đến với Thư viện số FPT</h3>
+    <p>Hệ thống hỗ trợ tra cứu tài liệu và quy chế mượn trả sách dành cho sinh viên.</p>
   </div>
 );
 
-const SkillsPage = () => (
-  <div className="py-3">
-    <h3>Kỹ năng chuyên môn</h3>
-    <ListGroup className="mt-3">
-      <ListGroup.Item>Frontend: ReactJS, HTML5, CSS3, Bootstrap</ListGroup.Item>
-      <ListGroup.Item>Backend: Node.js, Express, Java Servlets</ListGroup.Item>
-      <ListGroup.Item>Database: MongoDB, SQL Server</ListGroup.Item>
-      <ListGroup.Item>Công cụ: Git, Postman, Vite</ListGroup.Item>
-    </ListGroup>
+const BooksPage = () => {
+  const books = [
+    { id: 1, title: 'Clean Code', author: 'Robert C. Martin', year: 2008 },
+    { id: 2, title: 'Design Patterns', author: 'Erich Gamma et al.', year: 1994 },
+    { id: 3, title: 'You Don\'t Know JS', author: 'Kyle Simpson', year: 2015 },
+  ];
+
+  return (
+    <div>
+      <h4>Danh mục sách tham khảo</h4>
+      <Table striped bordered hover className="mt-3">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tên sách</th>
+            <th>Tác giả</th>
+            <th>Năm xuất bản</th>
+          </tr>
+        </thead>
+        <tbody>
+          {books.map((b) => (
+            <tr key={b.id}>
+              <td>{b.id}</td>
+              <td>{b.title}</td>
+              <td>{b.author}</td>
+              <td>{b.year}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </div>
+  );
+};
+
+const HelpLayout = () => (
+  <div>
+    <h4>Trung tâm trợ giúp & Hướng dẫn</h4>
+    <Nav variant="tabs" className="my-3">
+      <Nav.Link as={NavLink} to="faq">Câu hỏi thường gặp</Nav.Link>
+      <Nav.Link as={NavLink} to="rules">Nội quy</Nav.Link>
+    </Nav>
+    <div className="pt-2">
+      <Outlet />
+    </div>
   </div>
 );
 
-const ProjectsPage = () => (
-  <div className="py-3">
-    <h3>Dự án tiêu biểu</h3>
-    <Row className="mt-3 g-3">
-      {[1, 2, 3].map((num) => (
-        <Col md={4} key={num}>
-          <Card>
-            <Card.Body>
-              <Card.Title>Dự án {num}</Card.Title>
-              <Card.Text>Ứng dụng web xây dựng bằng React và React-Bootstrap.</Card.Text>
-              <Button variant="outline-primary" size="sm">Chi tiết</Button>
-            </Card.Body>
-          </Card>
-        </Col>
-      ))}
-    </Row>
+const FaqPage = () => (
+  <div>
+    <h6>Mỗi sinh viên được mượn tối đa bao nhiêu cuốn?</h6>
+    <p className="text-muted">Tối đa 3 cuốn sách chuyên ngành trong vòng 14 ngày.</p>
   </div>
 );
 
-const ContactPage = () => (
-  <div className="py-3">
-    <h3>Liên hệ</h3>
-    <p>Email: student@fe.edu.vn</p>
-    <p>Điện thoại: 0123 456 789</p>
+const RulesPage = () => (
+  <div>
+    <h6>Nội quy phòng đọc</h6>
+    <ul className="text-muted">
+      <li>Giữ trật tự chung trong khuôn viên thư viện.</li>
+      <li>Bảo quản tài liệu nguyên vẹn, không ghi chú lên sách.</li>
+    </ul>
   </div>
 );
 
 const NotFoundPage = () => (
-  <div className="py-5 text-center">
-    <h2 className="text-danger">404 - Không tìm thấy trang</h2>
-    <p>Đường dẫn bạn truy cập không tồn tại.</p>
-    <Button as={Link} to="/" variant="secondary">Về trang chủ</Button>
+  <div className="text-center py-4 text-danger">
+    <h5>404 - Trang không tồn tại</h5>
   </div>
 );
 
 export default function App() {
-  const MENU = [
-    { to: '/', label: 'Trang chủ', end: true },
-    { to: '/skills', label: 'Kỹ năng', end: false },
-    { to: '/projects', label: 'Dự án', end: false },
-    { to: '/contact', label: 'Liên hệ', end: false },
-  ];
-
   return (
     <Container className="p-3">
-      <Navbar bg="light" className="border rounded px-3 mb-3">
-        <Navbar.Brand as={Link} to="/">Portfolio</Navbar.Brand>
-        <Nav className="ms-auto">
-          {MENU.map((item) => (
-            <Nav.Link key={item.to} as={NavLink} to={item.to} end={item.end}>
-              {item.label}
-            </Nav.Link>
-          ))}
-        </Nav>
-      </Navbar>
-
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/skills" element={<SkillsPage />} />
-        <Route path="/projects" element={<ProjectsPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="books" element={<BooksPage />} />
+          <Route path="help" element={<HelpLayout />}>
+            <Route index element={<Navigate to="faq" replace />} />
+            <Route path="faq" element={<FaqPage />} />
+            <Route path="rules" element={<RulesPage />} />
+          </Route>
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
       </Routes>
     </Container>
   );
