@@ -1,0 +1,88 @@
+{
+  "posts": [
+    {
+      "id": 2,
+      "userId": 1,
+      "title": "Axios là gì? Cách gửi HTTP request trong React",
+      "body": "Axios là thư viện HTTP client phổ biến trong JavaScript. Hỗ trợ Promise, interceptors và nhiều tính năng mạnh mẽ khác."
+    },
+    {
+      "id": 3,
+      "userId": 1,
+      "title": "useState và useEffect – hai hook quan trọng nhất",
+      "body": "useState giúp quản lý state trong functional component. useEffect xử lý side effects như gọi API, đăng ký event listener."
+    },
+    {
+      "id": 4,
+      "userId": 1,
+      "title": "Xử lý lỗi và trạng thái loading trong ứng dụng React",
+      "body": "Mọi ứng dụng React cần xử lý ba trạng thái: loading, success và error. Bài viết hướng dẫn cách xử lý tốt nhất."
+    },
+    {
+      "id": 7,
+      "userId": 2,
+      "title": "Context API và Redux – Khi nào nên dùng cái nào?",
+      "body": "Context API phù hợp cho state đơn giản, global. Redux phù hợp cho ứng dụng phức tạp cần quản lý state toàn diện."
+    },
+    {
+      "id": 8,
+      "userId": 2,
+      "title": "Tối ưu hiệu suất React với useMemo và useCallback",
+      "body": "useMemo cache kết quả tính toán phức tạp. useCallback cache function để tránh re-render không cần thiết."
+    },
+    {
+      "id": 9,
+      "userId": 3,
+      "title": "Xây dựng Custom Hook trong React",
+      "body": "Custom hook giúp tái sử dụng logic giữa các component. Quy ước đặt tên bắt đầu bằng 'use' để React nhận biết."
+    },
+    {
+      "id": 10,
+      "userId": 3,
+      "title": "TypeScript với React – Tại sao nên học?",
+      "body": "TypeScript giúp phát hiện lỗi sớm trong quá trình phát triển, cải thiện autocomplete và làm code dễ đọc hơn."
+    },
+    {
+      "title": "new post",
+      "body": "aaaaaaaaaa",
+      "userId": 1,
+      "id": 13
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Nguyễn Văn An",
+      "email": "an.nguyen@example.com",
+      "username": "nguyenvanan"
+    },
+    {
+      "id": 2,
+      "name": "Trần Thị Bình",
+      "email": "binh.tran@example.com",
+      "username": "tranthbinh"
+    },
+    {
+      "id": 3,
+      "name": "Lê Minh Cường",
+      "email": "cuong.le@example.com",
+      "username": "leminhcuong"
+    }
+  ],
+  "comments": [
+    {
+      "id": 3,
+      "postId": 2,
+      "name": "Bình hỏi về Axios",
+      "email": "binh@example.com",
+      "body": "Axios khác gì so với fetch API của trình duyệt?"
+    },
+    {
+      "id": 4,
+      "postId": 2,
+      "name": "An trả lời",
+      "email": "an@example.com",
+      "body": "Axios tự động parse JSON, xử lý lỗi HTTP tốt hơn và hỗ trợ interceptors."
+    }
+  ]
+}
