@@ -1,29 +1,45 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type { RootState } from "@/lib/store";
 
-interface CounterState {
+type CounterState = {
   value: number;
-}
+  step: number;
+};
 
 const initialState: CounterState = {
   value: 0,
+  step: 1,
 };
 
 const counterSlice = createSlice({
   name: "counter",
   initialState,
   reducers: {
+    increment: (state) => {
+      state.value += state.step;
+    },
+    decrement: (state) => {
+      state.value -= state.step;
+    },
     incrementByAmount: (state, action: PayloadAction<number>) => {
       state.value += action.payload;
     },
-    decrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value -= action.payload;
-    },
-    resetCounter: (state) => {
+    reset: (state) => {
       state.value = 0;
+    },
+    stepChanged: (state, action: PayloadAction<number>) => {
+      state.step = action.payload;
     },
   },
 });
 
-export const { incrementByAmount, decrementByAmount, resetCounter } =
-  counterSlice.actions;
+export const {
+  increment,
+  decrement,
+  incrementByAmount,
+  reset,
+  stepChanged,
+} = counterSlice.actions;
+export const selectCount = (state: RootState) => state.counter.value;
+export const selectStep = (state: RootState) => state.counter.step;
 export default counterSlice.reducer;
