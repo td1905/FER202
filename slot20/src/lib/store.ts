@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import counterReducer from "@/lib/features/counter/counterSlice";
+import todosReducer from "@/lib/features/todos/todosSlice";
 import uiReducer from "@/lib/features/ui/uiSlice";
 
 export const makeStore = () =>
@@ -7,6 +8,7 @@ export const makeStore = () =>
     reducer: {
       counter: counterReducer,
       ui: uiReducer,
+      todos: todosReducer,
     },
   });
 
