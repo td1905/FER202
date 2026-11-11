@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { menuClosed, menuToggled, selectMenuOpen, selectTheme, themeToggled } from "@/lib/features/ui/uiSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import CartBadge from "./CartBadge";
 
 const links = [
   { href: "/", label: "Trang chủ" },
@@ -46,6 +47,7 @@ export default function Navbar() {
         </ul>
 
         <div className="flex items-center gap-2">
+          <CartBadge />
           <button
             type="button"
             onClick={() => dispatch(themeToggled())}

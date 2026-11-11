@@ -5,13 +5,14 @@ import {
   completedCleared,
   selectTodoStats,
 } from "@/lib/features/todos/todosSlice";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { useAppDispatch, useAppSelector, useIsMounted } from "@/lib/hooks";
 
 export default function TodoStats() {
   const dispatch = useAppDispatch();
   const { total, done, active, percent } = useAppSelector(selectTodoStats);
+  const isMounted = useIsMounted();
 
-  if (total === 0) return null;
+  if (!isMounted || total === 0) return null;
 
   return (
     <div className="mt-4 space-y-3 border-t border-slate-100 pt-4 text-sm dark:border-slate-800">

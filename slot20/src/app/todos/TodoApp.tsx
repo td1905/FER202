@@ -1,14 +1,16 @@
 "use client";
 
 import { selectVisibleTodos } from "@/lib/features/todos/todosSlice";
-import { useAppSelector } from "@/lib/hooks";
+import { useAppSelector, useIsMounted } from "@/lib/hooks";
 import TodoFilters from "./TodoFilters";
 import TodoForm from "./TodoForm";
 import TodoItem from "./TodoItem";
 import TodoStats from "./TodoStats";
 
 export default function TodoApp() {
-  const todos = useAppSelector(selectVisibleTodos);
+  const storedTodos = useAppSelector(selectVisibleTodos);
+  const isMounted = useIsMounted();
+  const todos = isMounted ? storedTodos : [];
 
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-lg dark:border-slate-800 dark:bg-slate-900">
